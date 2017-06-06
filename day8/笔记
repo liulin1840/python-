@@ -1,0 +1,137 @@
+静态方法
+    与类无关，不能访问类里的任何属性和方法
+类方法
+    只能访问类变量
+属性@property
+    把一个方法变成一个静态属性，
+    flight.status
+    @status.setter
+    flight.status = 3
+    @status.delter
+反射
+    getattr(obj,str)
+    setattr(obj,str,val)
+    hasattr(obj,str)
+    delattr(obj,str)
+
+    mod = __import__('lib.aa')
+    instance = getattr(mod.aa,"C")
+    obj = instance()
+    print  obj.name
+
+    mod = __import__('lib.aa')
+    obj = mod.aa.C()
+__new__
+class Foo(object):
+    def __call__()
+        print"call"
+
+Foo()()         #执行call方法
+
+__metaclass__   用来定义这个类以怎样的形式被创建
+
+try
+    ...
+except (ValueError,KeyError),e  #in 2.7
+except (ValueError,KeyError) as e : 3.x
+
+except Exception as e:放在异常处理最后面，
+
+else: #没发生异常，就执行
+
+finally, 无论如何都执行
+
+raise ValueError
+
+断言: 过安检,必须合格才能通过
+assert type(obj.name) is int
+print(obj.name /2)
+
+socket
+    tcp/ip  send, recv
+    udp
+    地址簇:
+    family address
+        AF.INET  ipv4协议
+        AF.INET6
+        AF.UNIX  就是本地local
+    协议类型:
+    socket protocol type
+        sock.SOCK_STREAM                      for  tcp/ip
+        socket.SOCK_DGRAM　　 数据报式socket , for  UDP
+
+
+    服务端
+    原因分析: 声明一个socket实例,提供一个借口,就相当于提供一个接头
+    server = socket.socket(AF.INET,sock.SOCK_STREAM)
+    为什么要绑定?为连接做准备
+    server.bind(localhost,9999)
+    要怎么做? 要服务,等待
+    server.listen()
+    while True:
+        等着接电话
+        conn,addr = server.accept() #阻塞,为新连接的请求开的实例
+        while True:
+           print("new conn",addr)
+           data = conn.recv(1024) #8192  #recv默认是阻塞的,接受
+
+           if not data:
+                break #客户端已断开， conn.recv收到的就都是空数据，
+           print(data)
+           conn.send(data.upper()) #发回给客户端
+    client
+       client = socket.socket()
+       client.connect(serverip, 9999 )
+       client.send(data)
+       client.send(data)
+       client.recv(dat)
+
+    socket 粘包:两次数据放在了一起,发一次收一次,就可以避免
+
+    ftp server
+    1. 读取文件名
+    2. 检测文件是否存在
+    3. 打开文件
+    4. 检测文件大小
+    5. 发送文件大小给客户端
+    6. 等客户端确认
+    7. 开始边读边发数据
+    8. 发送md5
+
+
+First, you must create a request handler
+class by subclassing the BaseRequestHandler class and overriding
+its handle() method; this method will process incoming requests. 　　
+
+你必须自己创建一个请求处理类，并且这个类要继承BaseRequestHandler,
+并且还有重写父亲类里的handle()
+
+Second, you must instantiate one of the server classes,
+passing it the server’s address and the request handler class.
+你必须实例化TCPServer ，
+并且传递server ip 和 你上面创建的请求处理类 给这个TCPServer
+
+Then call the handle_request() or serve_forever()
+method of the server object to process one or many requests.
+server.handle_request() #只处理一个请求
+server.serve_forever()  #处理多个一个请求，永远执行(常用的)
+
+
+Finally, call server_close() to close the socket.
+
+chenronhua
+    a
+        a1
+        a2
+    b
+    c
+chen: cd a
+cd ..
+
+user_current_dir = "/home/chenronghua"
+user_current_dir = "/home/chenronghua"
+
+
+
+os.system()#会启动一个新的目录
+os.chdir   切换的socketserver的工作目录#

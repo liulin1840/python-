@@ -1,0 +1,48 @@
+失控  kk , 必然
+
+浪潮之巅  ，数学之美
+
+
+线程 内存共享
+线程同时修改同一份数据时必须加锁，mutex互斥锁
+递归锁
+
+def run(n):
+  print('run thread...')
+
+for i in range(10):
+    t = threading.Thread(target=run, args=(n,))
+    t.setDaemon(True)
+    t.start()
+一个循环完了,变量没有释放
+
+print 'master is done....'
+
+守护线程(slave) 服务与非守护线程(master)
+
+
+进程 至少包含一个线程
+
+
+queue 作用:理解这个问题
+   (1) 解耦，使程序直接实现松耦合，
+   (2) 提高处理效率 ，
+
+   FIFO = first in first out 先进先出,
+   LIFO = last in first out  后入先出
+
+生产者消费者模型:解耦和
+
+io 操作不占用cpu
+
+计算占用cpu , 1+1
+
+python多线程 不适合cpu密集操作型的任务，适合io操作密集型的任务
+分析:有大量的cpu运算,不要用多线程,不会提升效率,
+
+multiprocess
+Queue  \ Pipe 只是实现进程间数据的传递
+Manager 实现了进程间数据的共享，即多个进程可以修改同一份数据
+
+
+IO 多路复用
